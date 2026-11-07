@@ -20,5 +20,27 @@
 </head>
 <body>
 <iframe src="https://script.google.com/macros/s/AKfycbxXXP40EGPnnBu8iOZlxSclCIWaG_teGaUe49-ZUWKjyDhZ2kr_5EyaqcRXBLEj4c4K/exec" title="西湖 801" allow="clipboard-write"></iframe>
+<script>
+// 幫 App 保存登入狀態，關掉再開也不會被登出
+window.addEventListener('message', function (e) {
+  var d = e.data;
+  if (!d || d.xh801 !== 1) return;
+  var host = '';
+  try { host = new URL(e.origin).hostname; } catch (_) { return; }
+  if (!/\.googleusercontent\.com$/.test(host)) return;
+  var P = 'xh801:';
+  try {
+    if (d.op === 'get') {
+      var data = {};
+      (d.keys || []).forEach(function (k) { var v = localStorage.getItem(P + k); if (v !== null) data[k] = v; });
+      e.source.postMessage({ xh801: 1, op: 'data', data: data }, e.origin);
+    } else if (d.op === 'set') {
+      localStorage.setItem(P + d.k, String(d.v));
+    } else if (d.op === 'del') {
+      localStorage.removeItem(P + d.k);
+    }
+  } catch (err) {}
+});
+</script>
 </body>
 </html>
