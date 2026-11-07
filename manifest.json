@@ -1,0 +1,11 @@
+{
+  "name": "西湖 801",
+  "short_name": "西湖 801",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#d6eadb",
+  "theme_color": "#d6eadb",
+  "icons": [
+    { "src": "icon.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}
